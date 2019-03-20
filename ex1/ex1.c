@@ -9,6 +9,18 @@
 int main(void)
 {
     // Your code here
-
+    int x = 100;
+    int pid = fork();
+    if(!pid){
+        printf("Child X: %d\n", x);
+        x = 200;
+        exit(0);
+    } else {
+        printf("Parent X: %d\n", x);
+        x = 300;
+    }
     return 0;
 }
+
+// Both printf statements output a value of 100 for x,
+// reflecting how each process gets its own distinct copy of x.
