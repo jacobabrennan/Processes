@@ -9,6 +9,20 @@
 int main(void)
 {
     // Your code here 
-    
+    FILE *text_txt = fopen("text.txt", "w");
+    int pid = fork();
+
+    if(!pid)
+    {
+        fprintf(text_txt, "Child\n");
+    }
+    else
+    {
+        fprintf(text_txt, "Parent\n");
+    }
     return 0;
 }
+
+// Both the processes were able to write to the file without any issues.
+// The order they wrote in was effectively random.
+// Further, each was able to use the write mode without first deleting the file.
