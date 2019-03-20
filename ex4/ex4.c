@@ -11,6 +11,32 @@
 int main(void)
 {
     // Your code here    
-
+    char *null_array[] = {NULL};
+    if(!fork())
+    {
+        execl("/bin/ls", NULL);
+        printf("\n");
+    }
+    wait(NULL);
+    if(!fork())
+    {
+        execle("/bin/ls", NULL, null_array);
+        printf("\n");
+    }
+    wait(NULL);
+    if(!fork())
+    {
+        execv("/bin/ls", null_array);
+        printf("\n");
+    }
+    wait(NULL);
     return 0;
 }
+
+// The options denoting argument format provide ease of use for different use
+// cases. Developers may find it easier to use the l (list) versions of exec
+// when manually writing out the exec calls. Being able to supply the arguments
+// as a vector (v) makes it easier to write a program that executes many
+// different programs with different arguments based on input.
+// The path (p) and environment (e) forms, similarly, allow the simulation of
+// any kind of execution environment.
