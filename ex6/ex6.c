@@ -18,9 +18,22 @@ and `clock_gettime()` should work just fine.
 #define number_iter 1000000
 #define BILLION 1000000000L
 
+
 int main()
 {
-    // Your code here
-    
+    struct timespec timer;
+    clock_gettime(CLOCK_MONOTONIC, &timer);
+    time_t start_time_s = timer.tv_sec;
+    long start_time_n = timer.tv_nsec;
+    for(int call_index=0; call_index < number_iter; call_index++)
+    {
+        fprintf(stdout, NULL);
+    }
+    clock_gettime(CLOCK_MONOTONIC, &timer);
+    time_t end_time_s = timer.tv_sec;
+    long end_time_n = timer.tv_nsec;
+    uint64_t delta_t = BILLION*(end_time_s - start_time_s) + (end_time_n - start_time_n);
+    printf("Total Time: %d\n", delta_t);
+    printf("Average Time: %d\n", delta_t/number_iter);
     return 0;
 }
